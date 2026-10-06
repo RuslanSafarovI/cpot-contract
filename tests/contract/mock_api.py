@@ -216,7 +216,6 @@ class Handler(BaseHTTPRequestHandler):
                 obj["status"] = "ready"; obj["data"]["status"] = "ready"
             return self._send(200, {"data": {"package_id": pid, "items": items, "snapshot_at": "2026-01-01T00:00:00Z"}})
         elif template == "/document-packages/{id}/download":
-            # Явно проверяем наличие values и берем id из пути, а не из values
             if not values:
                 return self._send(404, {"code": "not_found"})
             pid = values
