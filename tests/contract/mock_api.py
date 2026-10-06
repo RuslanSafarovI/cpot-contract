@@ -215,15 +215,16 @@ class Handler(BaseHTTPRequestHandler):
             if obj is not None:
                 obj["status"] = "ready"; obj["data"]["status"] = "ready"
             return self._send(200, {"data": {"package_id": pid, "items": items, "snapshot_at": "2026-01-01T00:00:00Z"}})
-       if template == "/document-packages/{id}/download":
-    pid = values[0]
-    exp = int(time.time()) + 300
-    key = f"packages/{pid}"
-    sig = _sign(tenant, key, exp)
-    # Изменена генерация URL
+      text
+if template == "/document-packages/{id}/download":
+    pid = values[0]    # 4 пробела
+    exp = int(time.time()) + 300    # те же 4 пробела
+    key = f"packages/{pid}"    # те же 4 пробела
+    sig = _sign(tenant, key, exp)    # те же 4 пробела
+    # Комментарий без отступа
     url = f"http://127.0.0.1:{os.environ.get('CPOT_PORT', 52868)}/document-packages/download-signed?" \
-          f"tenant={tenant}&key={key}&exp={exp}&sig={sig}"
-    return self._send(200, {"data": {"url": url, "expires_at": "2026-01-01T00:05:00Z"}})
+          f"tenant={tenant}&key={key}&exp={exp}&sig={sig}"    # те же 4 пробела
+    return self._send(200, {"data": {"url": url, "expires_at": "2026-01-01T00:05:00Z"}})    
 
         # ---- requests ----
         if template == "/requests/{id}/assign-executor":
