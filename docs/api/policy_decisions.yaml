@@ -1,0 +1,31 @@
+version: '1.1'
+note: Три пункта — это архитектурные решения, а не тест-гэпы. Пока decision пуст,
+  пункт не считается покрытым.
+decisions:
+- id: SEC-41
+  title: Раскрытие существования объекта в ошибках
+  question: Отвечать 404 всегда или согласованным 403?
+  decision: null
+  options:
+  - value: always_404
+    pro: не отличает «нет» от «чужой», не даёт оракула
+  - value: tenant_403
+    pro: понятнее клиенту, но раскрывает существование
+- id: SEC-38
+  title: Поведение уже выданной signed URL после revoke
+  question: TTL и семантика отзыва уже выданной ссылки?
+  decision: null
+  options:
+  - value: short_ttl_denylist
+    pro: короткий TTL + deny-list ключей
+  - value: no_revoke
+    pro: проще, но ссылка живёт до истечения
+- id: SEC-52
+  title: Момент проверки доступа при отзыве
+  question: Проверять на старте операции, на каждом объекте или при выдаче результата?
+  decision: null
+  options:
+  - value: start_and_emit
+    pro: проверка на старте и при выдаче результата
+  - value: per_object
+    pro: дороже, но точнее на длинных операциях

@@ -1,0 +1,3466 @@
+openapi: 3.1.0
+info:
+  title: ЦПОТ API
+  version: 1.3.0
+servers:
+- url: http://localhost:52868
+paths:
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      operationId: postAuthLogin
+      summary: 'Auth: POST /auth/login'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /auth/refresh:
+    post:
+      tags:
+      - Auth
+      operationId: postAuthRefresh
+      summary: 'Auth: POST /auth/refresh'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /auth/logout:
+    post:
+      tags:
+      - Auth
+      operationId: postAuthLogout
+      summary: 'Auth: POST /auth/logout'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /auth/mfa/enroll:
+    post:
+      tags:
+      - Auth
+      operationId: postAuthMfaEnroll
+      summary: 'Auth: POST /auth/mfa/enroll'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /auth/mfa/verify:
+    post:
+      tags:
+      - Auth
+      operationId: postAuthMfaVerify
+      summary: 'Auth: POST /auth/mfa/verify'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /auth/mfa/disable:
+    post:
+      tags:
+      - Auth
+      operationId: postAuthMfaDisable
+      summary: 'Auth: POST /auth/mfa/disable'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /auth/password/reset-request:
+    post:
+      tags:
+      - Auth
+      operationId: postAuthPasswordReset-request
+      summary: 'Auth: POST /auth/password/reset-request'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /auth/password/reset:
+    post:
+      tags:
+      - Auth
+      operationId: postAuthPasswordReset
+      summary: 'Auth: POST /auth/password/reset'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /auth/password/change:
+    post:
+      tags:
+      - Auth
+      operationId: postAuthPasswordChange
+      summary: 'Auth: POST /auth/password/change'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /me:
+    get:
+      tags:
+      - Auth
+      operationId: getMe
+      summary: 'Auth: GET /me'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /organizations/{id}:
+    get:
+      tags:
+      - Organizations
+      operationId: getOrganizationsId
+      summary: 'Organizations: GET /organizations/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Organizations
+      operationId: patchOrganizationsId
+      summary: 'Organizations: PATCH /organizations/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /employees:
+    get:
+      tags:
+      - Employees
+      operationId: getEmployees
+      summary: 'Employees: GET /employees'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Employees
+      operationId: postEmployees
+      summary: 'Employees: POST /employees'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /employees/search:
+    get:
+      tags:
+      - Employees
+      operationId: getEmployeesSearch
+      summary: 'Employees: GET /employees/search'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /employees/{id}:
+    get:
+      tags:
+      - Employees
+      operationId: getEmployeesId
+      summary: 'Employees: GET /employees/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Employees
+      operationId: patchEmployeesId
+      summary: 'Employees: PATCH /employees/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    delete:
+      tags:
+      - Employees
+      operationId: deleteEmployeesId
+      summary: 'Employees: DELETE /employees/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /employees/{id}/history:
+    get:
+      tags:
+      - Employees
+      operationId: getEmployeesIdHistory
+      summary: 'Employees: GET /employees/{id}/history'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /employees/{id}/training:
+    get:
+      tags:
+      - Employees
+      operationId: getEmployeesIdTraining
+      summary: 'Employees: GET /employees/{id}/training'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /employees/{id}/compliance:
+    get:
+      tags:
+      - Employees
+      operationId: getEmployeesIdCompliance
+      summary: 'Employees: GET /employees/{id}/compliance'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /documents:
+    get:
+      tags:
+      - Documents
+      operationId: getDocuments
+      summary: 'Documents: GET /documents'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Documents
+      operationId: postDocuments
+      summary: 'Documents: POST /documents'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /documents/ingest:
+    post:
+      tags:
+      - Documents
+      operationId: postDocumentsIngest
+      summary: 'Documents: POST /documents/ingest'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /documents/{id}:
+    get:
+      tags:
+      - Documents
+      operationId: getDocumentsId
+      summary: 'Documents: GET /documents/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Documents
+      operationId: patchDocumentsId
+      summary: 'Documents: PATCH /documents/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /documents/{id}/confirm:
+    post:
+      tags:
+      - Documents
+      operationId: postDocumentsIdConfirm
+      summary: 'Documents: POST /documents/{id}/confirm'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /documents/{id}/extraction-confirm:
+    post:
+      tags:
+      - Documents
+      operationId: postDocumentsIdExtraction-confirm
+      summary: 'Documents: POST /documents/{id}/extraction-confirm'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /documents/{id}/links:
+    get:
+      tags:
+      - Documents
+      operationId: getDocumentsIdLinks
+      summary: 'Documents: GET /documents/{id}/links'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Documents
+      operationId: postDocumentsIdLinks
+      summary: 'Documents: POST /documents/{id}/links'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /documents/{id}/versions:
+    get:
+      tags:
+      - Documents
+      operationId: getDocumentsIdVersions
+      summary: 'Documents: GET /documents/{id}/versions'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /source-files/upload-sessions:
+    post:
+      tags:
+      - SourceFiles
+      operationId: postSource-filesUpload-sessions
+      summary: 'SourceFiles: POST /source-files/upload-sessions'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /source-files/upload-sessions/{id}/complete:
+    post:
+      tags:
+      - SourceFiles
+      operationId: postSource-filesUpload-sessionsIdComplete
+      summary: 'SourceFiles: POST /source-files/upload-sessions/{id}/complete'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /source-files/{id}:
+    get:
+      tags:
+      - SourceFiles
+      operationId: getSource-filesId
+      summary: 'SourceFiles: GET /source-files/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /source-files/{id}/pages:
+    get:
+      tags:
+      - SourceFiles
+      operationId: getSource-filesIdPages
+      summary: 'SourceFiles: GET /source-files/{id}/pages'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /processing-jobs/{id}:
+    get:
+      tags:
+      - ProcessingJobs
+      operationId: getProcessing-jobsId
+      summary: 'ProcessingJobs: GET /processing-jobs/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /analysis/company:
+    post:
+      tags:
+      - Analysis
+      operationId: postAnalysisCompany
+      summary: 'Analysis: POST /analysis/company'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /analysis/{id}:
+    get:
+      tags:
+      - Analysis
+      operationId: getAnalysisId
+      summary: 'Analysis: GET /analysis/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /analysis/{id}/findings:
+    get:
+      tags:
+      - Analysis
+      operationId: getAnalysisIdFindings
+      summary: 'Analysis: GET /analysis/{id}/findings'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /analysis/{id}/recommendations:
+    get:
+      tags:
+      - Analysis
+      operationId: getAnalysisIdRecommendations
+      summary: 'Analysis: GET /analysis/{id}/recommendations'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /requests:
+    get:
+      tags:
+      - Requests
+      operationId: getRequests
+      summary: 'Requests: GET /requests'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Requests
+      operationId: postRequests
+      summary: 'Requests: POST /requests'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /requests/{id}:
+    get:
+      tags:
+      - Requests
+      operationId: getRequestsId
+      summary: 'Requests: GET /requests/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Requests
+      operationId: patchRequestsId
+      summary: 'Requests: PATCH /requests/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /requests/{id}/assign-executor:
+    post:
+      tags:
+      - Requests
+      operationId: postRequestsIdAssign-executor
+      summary: 'Requests: POST /requests/{id}/assign-executor'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /requests/{id}/items:
+    post:
+      tags:
+      - Requests
+      operationId: postRequestsIdItems
+      summary: 'Requests: POST /requests/{id}/items'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /document-packages:
+    get:
+      tags:
+      - Packages
+      operationId: getDocument-packages
+      summary: 'Packages: GET /document-packages'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Packages
+      operationId: postDocument-packages
+      summary: 'Packages: POST /document-packages'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /document-packages/{id}:
+    get:
+      tags:
+      - Packages
+      operationId: getDocument-packagesId
+      summary: 'Packages: GET /document-packages/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /document-packages/{id}/items:
+    post:
+      tags:
+      - Packages
+      operationId: postDocument-packagesIdItems
+      summary: 'Packages: POST /document-packages/{id}/items'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /document-packages/{id}/build:
+    post:
+      tags:
+      - Packages
+      operationId: postDocument-packagesIdBuild
+      summary: 'Packages: POST /document-packages/{id}/build'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /document-packages/{id}/generate:
+    post:
+      tags:
+      - Packages
+      operationId: postDocument-packagesIdGenerate
+      summary: 'Packages: POST /document-packages/{id}/generate'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /document-packages/{id}/download:
+    get:
+      tags:
+      - Packages
+      operationId: getDocument-packagesIdDownload
+      summary: 'Packages: GET /document-packages/{id}/download'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /executors:
+    get:
+      tags:
+      - Executors
+      operationId: getExecutors
+      summary: 'Executors: GET /executors'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /executors/{id}:
+    get:
+      tags:
+      - Executors
+      operationId: getExecutorsId
+      summary: 'Executors: GET /executors/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /executors/{id}/organizations/{organization_id}/access:
+    post:
+      tags:
+      - Executors
+      operationId: postExecutorsIdOrganizationsOrganization_idAccess
+      summary: 'Executors: POST /executors/{id}/organizations/{organization_id}/access'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: organization_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+    delete:
+      tags:
+      - Executors
+      operationId: deleteExecutorsIdOrganizationsOrganization_idAccess
+      summary: 'Executors: DELETE /executors/{id}/organizations/{organization_id}/access'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: organization_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /review-tasks:
+    get:
+      tags:
+      - ReviewTasks
+      operationId: getReview-tasks
+      summary: 'ReviewTasks: GET /review-tasks'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /review-tasks/{id}:
+    get:
+      tags:
+      - ReviewTasks
+      operationId: getReview-tasksId
+      summary: 'ReviewTasks: GET /review-tasks/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /review-tasks/{id}/resolve:
+    post:
+      tags:
+      - ReviewTasks
+      operationId: postReview-tasksIdResolve
+      summary: 'ReviewTasks: POST /review-tasks/{id}/resolve'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /findings/{id}:
+    get:
+      tags:
+      - Findings
+      operationId: getFindingsId
+      summary: 'Findings: GET /findings/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /findings/{id}/resolve:
+    post:
+      tags:
+      - Findings
+      operationId: postFindingsIdResolve
+      summary: 'Findings: POST /findings/{id}/resolve'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /audit-events:
+    get:
+      tags:
+      - Audit
+      operationId: getAudit-events
+      summary: 'Audit: GET /audit-events'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /audit-events/{id}:
+    get:
+      tags:
+      - Audit
+      operationId: getAudit-eventsId
+      summary: 'Audit: GET /audit-events/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /deadlines:
+    get:
+      tags:
+      - Reads
+      operationId: getDeadlines
+      summary: 'Reads: GET /deadlines'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /deadlines/{id}:
+    get:
+      tags:
+      - Reads
+      operationId: getDeadlinesId
+      summary: 'Reads: GET /deadlines/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /alerts:
+    get:
+      tags:
+      - Reads
+      operationId: getAlerts
+      summary: 'Reads: GET /alerts'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /alerts/{id}:
+    get:
+      tags:
+      - Reads
+      operationId: getAlertsId
+      summary: 'Reads: GET /alerts/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /integrations:
+    get:
+      tags:
+      - Reads
+      operationId: getIntegrations
+      summary: 'Reads: GET /integrations'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /integrations/{id}:
+    get:
+      tags:
+      - Reads
+      operationId: getIntegrationsId
+      summary: 'Reads: GET /integrations/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /webhooks:
+    get:
+      tags:
+      - Webhooks
+      operationId: getWebhooks
+      summary: 'Webhooks: GET /webhooks'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /webhooks/{id}/test:
+    post:
+      tags:
+      - Webhooks
+      operationId: postWebhooksIdTest
+      summary: 'Webhooks: POST /webhooks/{id}/test'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /users:
+    get:
+      tags:
+      - Users
+      operationId: getUsers
+      summary: 'Users: GET /users'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Users
+      operationId: postUsers
+      summary: 'Users: POST /users'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /users/{id}:
+    get:
+      tags:
+      - Users
+      operationId: getUsersId
+      summary: 'Users: GET /users/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Users
+      operationId: patchUsersId
+      summary: 'Users: PATCH /users/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    delete:
+      tags:
+      - Users
+      operationId: deleteUsersId
+      summary: 'Users: DELETE /users/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /rules:
+    get:
+      tags:
+      - Rules
+      operationId: getRules
+      summary: 'Rules: GET /rules'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Rules
+      operationId: postRules
+      summary: 'Rules: POST /rules'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /rules/{id}:
+    get:
+      tags:
+      - Rules
+      operationId: getRulesId
+      summary: 'Rules: GET /rules/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Rules
+      operationId: patchRulesId
+      summary: 'Rules: PATCH /rules/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    delete:
+      tags:
+      - Rules
+      operationId: deleteRulesId
+      summary: 'Rules: DELETE /rules/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /dictionaries/departments:
+    get:
+      tags:
+      - Dictionaries
+      operationId: getDictionariesDepartments
+      summary: 'Dictionaries: GET /dictionaries/departments'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Dictionaries
+      operationId: postDictionariesDepartments
+      summary: 'Dictionaries: POST /dictionaries/departments'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /dictionaries/departments/{id}:
+    get:
+      tags:
+      - Dictionaries
+      operationId: getDictionariesDepartmentsId
+      summary: 'Dictionaries: GET /dictionaries/departments/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Dictionaries
+      operationId: patchDictionariesDepartmentsId
+      summary: 'Dictionaries: PATCH /dictionaries/departments/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /dictionaries/departments/{id}/archive:
+    post:
+      tags:
+      - Dictionaries
+      operationId: postDictionariesDepartmentsIdArchive
+      summary: 'Dictionaries: POST /dictionaries/departments/{id}/archive'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /dictionaries/positions:
+    get:
+      tags:
+      - Dictionaries
+      operationId: getDictionariesPositions
+      summary: 'Dictionaries: GET /dictionaries/positions'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Dictionaries
+      operationId: postDictionariesPositions
+      summary: 'Dictionaries: POST /dictionaries/positions'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /dictionaries/positions/{id}:
+    patch:
+      tags:
+      - Dictionaries
+      operationId: patchDictionariesPositionsId
+      summary: 'Dictionaries: PATCH /dictionaries/positions/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /training-records:
+    get:
+      tags:
+      - Training
+      operationId: getTraining-records
+      summary: 'Training: GET /training-records'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /training-records/{id}:
+    get:
+      tags:
+      - Training
+      operationId: getTraining-recordsId
+      summary: 'Training: GET /training-records/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /outbox:
+    get:
+      tags:
+      - Outbox
+      operationId: getOutbox
+      summary: 'Outbox: GET /outbox'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /outbox/{id}:
+    get:
+      tags:
+      - Outbox
+      operationId: getOutboxId
+      summary: 'Outbox: GET /outbox/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /workplaces:
+    get:
+      tags:
+      - Workplaces
+      operationId: getWorkplaces
+      summary: 'Workplaces: GET /workplaces'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Workplaces
+      operationId: postWorkplaces
+      summary: 'Workplaces: POST /workplaces'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /workplaces/{id}:
+    get:
+      tags:
+      - Workplaces
+      operationId: getWorkplacesId
+      summary: 'Workplaces: GET /workplaces/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Workplaces
+      operationId: patchWorkplacesId
+      summary: 'Workplaces: PATCH /workplaces/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /workplaces/{id}/archive:
+    post:
+      tags:
+      - Workplaces
+      operationId: postWorkplacesIdArchive
+      summary: 'Workplaces: POST /workplaces/{id}/archive'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /hazards:
+    get:
+      tags:
+      - Hazards
+      operationId: getHazards
+      summary: 'Hazards: GET /hazards'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Hazards
+      operationId: postHazards
+      summary: 'Hazards: POST /hazards'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /hazards/{id}:
+    get:
+      tags:
+      - Hazards
+      operationId: getHazardsId
+      summary: 'Hazards: GET /hazards/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Hazards
+      operationId: patchHazardsId
+      summary: 'Hazards: PATCH /hazards/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /sout-cards:
+    get:
+      tags:
+      - Sout
+      operationId: getSout-cards
+      summary: 'Sout: GET /sout-cards'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Sout
+      operationId: postSout-cards
+      summary: 'Sout: POST /sout-cards'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /sout-cards/{id}:
+    get:
+      tags:
+      - Sout
+      operationId: getSout-cardsId
+      summary: 'Sout: GET /sout-cards/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Sout
+      operationId: patchSout-cardsId
+      summary: 'Sout: PATCH /sout-cards/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /sout-cards/{id}/confirm:
+    post:
+      tags:
+      - Sout
+      operationId: postSout-cardsIdConfirm
+      summary: 'Sout: POST /sout-cards/{id}/confirm'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /ppe:
+    get:
+      tags:
+      - Ppe
+      operationId: getPpe
+      summary: 'Ppe: GET /ppe'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    post:
+      tags:
+      - Ppe
+      operationId: postPpe
+      summary: 'Ppe: POST /ppe'
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+  /ppe/{id}:
+    get:
+      tags:
+      - Ppe
+      operationId: getPpeId
+      summary: 'Ppe: GET /ppe/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+    patch:
+      tags:
+      - Ppe
+      operationId: patchPpeId
+      summary: 'Ppe: PATCH /ppe/{id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IfMatch'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+  /ppe/{id}/issue:
+    post:
+      tags:
+      - Ppe
+      operationId: postPpeIdIssue
+      summary: 'Ppe: POST /ppe/{id}/issue'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '409':
+          description: Conflict
+        '422':
+          description: Validation error
+        '201':
+          description: Created
+components:
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema:
+        type: string
+    IfMatch:
+      name: If-Match
+      in: header
+      required: false
+      schema:
+        type: string
+  schemas:
+    Meta:
+      type: object
+      properties:
+        request_id:
+          type: string
+        generated_at:
+          type: string
+          format: date-time
+    Pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: integer
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - admin
+          - manager
+          - specialist
+          - viewer
+        organization_id:
+          type: string
+        mfa_enabled:
+          type: boolean
+        version:
+          type: integer
+    Employee:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        full_name:
+          type: string
+        position_id:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+    Department:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        archived:
+          type: boolean
+        version:
+          type: integer
+    Position:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        version:
+          type: integer
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+        source_file_id:
+          type: string
+        version:
+          type: integer
+    SourceFile:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        filename:
+          type: string
+        size:
+          type: integer
+        checksum:
+          type: string
+    Page:
+      type: object
+      properties:
+        id:
+          type: string
+        source_file_id:
+          type: string
+        number:
+          type: integer
+        text:
+          type: string
+    ProcessingJob:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        kind:
+          type: string
+        status:
+          type: string
+    AnalysisRun:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+    Finding:
+      type: object
+      properties:
+        id:
+          type: string
+        analysis_id:
+          type: string
+        organization_id:
+          type: string
+        severity:
+          type: string
+        status:
+          type: string
+        title:
+          type: string
+    Recommendation:
+      type: object
+      properties:
+        id:
+          type: string
+        analysis_id:
+          type: string
+        organization_id:
+          type: string
+        text:
+          type: string
+    Request:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        source_finding_id:
+          type: string
+        executor_id:
+          type: string
+        version:
+          type: integer
+    RequestItem:
+      type: object
+      properties:
+        id:
+          type: string
+        request_id:
+          type: string
+        employee_id:
+          type: string
+        document_id:
+          type: string
+    DocumentPackage:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageItem'
+    PackageItem:
+      type: object
+      properties:
+        id:
+          type: string
+        package_id:
+          type: string
+        document_id:
+          type: string
+        requirement_id:
+          type: string
+    Executor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        scope:
+          type: string
+    ExecutorAccess:
+      type: object
+      properties:
+        executor_id:
+          type: string
+        organization_id:
+          type: string
+        granted_at:
+          type: string
+          format: date-time
+    ReviewTask:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        document_id:
+          type: string
+    AuditEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        actor_id:
+          type: string
+        action:
+          type: string
+        at:
+          type: string
+          format: date-time
+    Deadline:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        due_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+    Alert:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        level:
+          type: string
+        message:
+          type: string
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        kind:
+          type: string
+        enabled:
+          type: boolean
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        destination:
+          type: string
+        enabled:
+          type: boolean
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        expression:
+          type: string
+        version:
+          type: integer
+    TrainingRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        employee_id:
+          type: string
+        course:
+          type: string
+        completed_at:
+          type: string
+          format: date-time
+    UploadSession:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+    OutboxEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        tenant_id:
+          type: string
+        type:
+          type: string
+        payload:
+          type: object
+    Workplace:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+    Hazard:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        severity:
+          type: string
+        version:
+          type: integer
+    SoutCard:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        workplace_id:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+    PpeItem:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+    SignedUrl:
+      type: object
+      properties:
+        url:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+    IngestResult:
+      type: object
+      properties:
+        accepted_refs:
+          type: array
+          items:
+            type: string
+        rejected_refs:
+          type: array
+          items:
+            type: string
+        job_id:
+          type: string
+    MfaEnrollment:
+      type: object
+      properties:
+        secret:
+          type: string
+        otpauth_url:
+          type: string
+        status:
+          type: string
+    PasswordAction:
+      type: object
+      properties:
+        status:
+          type: string
+        email:
+          type: string
+    TokenPair:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+    RoleMatrix:
+      type: object
+      properties:
+        role:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    Snapshot:
+      type: object
+      properties:
+        package_id:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageItem'
+        snapshot_at:
+          type: string
+          format: date-time
+    Me:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+        organization_id:
+          type: string
+    Envelope:
+      type: object
+      properties:
+        data: {}
+        meta:
+          $ref: '#/components/schemas/Meta'

@@ -1,0 +1,72 @@
+# IDOR matrix
+
+probes=66 pass=66 fail=0
+
+| Method | Path | attack (A->B) | control (A->A) | Status |
+|---|---|---|---|---|
+| GET | `/organizations/{id}` | 404 | 200 | PASS |
+| PATCH | `/organizations/{id}` | 404 | 200 | PASS |
+| GET | `/employees/{id}` | 404 | 200 | PASS |
+| PATCH | `/employees/{id}` | 404 | 200 | PASS |
+| DELETE | `/employees/{id}` | 404 | 204 | PASS |
+| GET | `/employees/{id}/history` | 404 | 200 | PASS |
+| GET | `/employees/{id}/training` | 404 | 200 | PASS |
+| GET | `/employees/{id}/compliance` | 404 | 200 | PASS |
+| GET | `/documents/{id}` | 404 | 200 | PASS |
+| PATCH | `/documents/{id}` | 404 | 200 | PASS |
+| POST | `/documents/{id}/confirm` | 404 | 200 | PASS |
+| POST | `/documents/{id}/extraction-confirm` | 404 | 200 | PASS |
+| GET | `/documents/{id}/links` | 404 | 200 | PASS |
+| POST | `/documents/{id}/links` | 404 | 200 | PASS |
+| GET | `/documents/{id}/versions` | 404 | 200 | PASS |
+| POST | `/source-files/upload-sessions/{id}/complete` | 404 | 200 | PASS |
+| GET | `/source-files/{id}` | 404 | 200 | PASS |
+| GET | `/source-files/{id}/pages` | 404 | 200 | PASS |
+| GET | `/processing-jobs/{id}` | 404 | 200 | PASS |
+| GET | `/analysis/{id}` | 404 | 200 | PASS |
+| GET | `/analysis/{id}/findings` | 404 | 200 | PASS |
+| GET | `/analysis/{id}/recommendations` | 404 | 200 | PASS |
+| GET | `/requests/{id}` | 404 | 200 | PASS |
+| PATCH | `/requests/{id}` | 404 | 200 | PASS |
+| POST | `/requests/{id}/assign-executor` | 404 | 200 | PASS |
+| POST | `/requests/{id}/items` | 404 | 201 | PASS |
+| GET | `/document-packages/{id}` | 404 | 200 | PASS |
+| POST | `/document-packages/{id}/items` | 404 | 422 | PASS |
+| POST | `/document-packages/{id}/build` | 404 | 200 | PASS |
+| POST | `/document-packages/{id}/generate` | 404 | 200 | PASS |
+| GET | `/document-packages/{id}/download` | 404 | 200 | PASS |
+| GET | `/executors/{id}` | 404 | 200 | PASS |
+| POST | `/executors/{id}/organizations/{organization_id}/access` | 404 | 201 | PASS |
+| DELETE | `/executors/{id}/organizations/{organization_id}/access` | 404 | 204 | PASS |
+| GET | `/review-tasks/{id}` | 404 | 200 | PASS |
+| POST | `/review-tasks/{id}/resolve` | 404 | 200 | PASS |
+| GET | `/findings/{id}` | 404 | 200 | PASS |
+| POST | `/findings/{id}/resolve` | 404 | 200 | PASS |
+| GET | `/audit-events/{id}` | 404 | 200 | PASS |
+| GET | `/deadlines/{id}` | 404 | 200 | PASS |
+| GET | `/alerts/{id}` | 404 | 200 | PASS |
+| GET | `/integrations/{id}` | 404 | 200 | PASS |
+| POST | `/webhooks/{id}/test` | 404 | 200 | PASS |
+| GET | `/users/{id}` | 404 | 200 | PASS |
+| PATCH | `/users/{id}` | 404 | 200 | PASS |
+| DELETE | `/users/{id}` | 404 | 204 | PASS |
+| GET | `/rules/{id}` | 404 | 200 | PASS |
+| PATCH | `/rules/{id}` | 404 | 200 | PASS |
+| DELETE | `/rules/{id}` | 404 | 204 | PASS |
+| GET | `/dictionaries/departments/{id}` | 404 | 200 | PASS |
+| PATCH | `/dictionaries/departments/{id}` | 404 | 200 | PASS |
+| POST | `/dictionaries/departments/{id}/archive` | 404 | 204 | PASS |
+| PATCH | `/dictionaries/positions/{id}` | 404 | 200 | PASS |
+| GET | `/training-records/{id}` | 404 | 200 | PASS |
+| GET | `/outbox/{id}` | 404 | 200 | PASS |
+| GET | `/workplaces/{id}` | 404 | 200 | PASS |
+| PATCH | `/workplaces/{id}` | 404 | 200 | PASS |
+| POST | `/workplaces/{id}/archive` | 404 | 204 | PASS |
+| GET | `/hazards/{id}` | 404 | 200 | PASS |
+| PATCH | `/hazards/{id}` | 404 | 200 | PASS |
+| GET | `/sout-cards/{id}` | 404 | 200 | PASS |
+| PATCH | `/sout-cards/{id}` | 404 | 200 | PASS |
+| POST | `/sout-cards/{id}/confirm` | 404 | 200 | PASS |
+| GET | `/ppe/{id}` | 404 | 200 | PASS |
+| PATCH | `/ppe/{id}` | 404 | 200 | PASS |
+| POST | `/ppe/{id}/issue` | 404 | 200 | PASS |

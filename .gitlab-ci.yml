@@ -1,0 +1,15 @@
+stages: [contract]
+
+contract:
+  stage: contract
+  image: python:3.12
+  variables:
+    CPOT_STRICT: "0"
+  script:
+    - pip install pyyaml pytest
+    - python scripts/ci_contract.py
+    - pytest -q
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      variables:
+        CPOT_STRICT: "1"

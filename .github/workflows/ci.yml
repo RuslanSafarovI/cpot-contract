@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml pytest
+      - name: Contract stage
+        env:
+          CPOT_STRICT: ${{ github.ref == 'refs/heads/main' && '1' || '0' }}
+        run: python scripts/ci_contract.py
+      - run: pytest -q

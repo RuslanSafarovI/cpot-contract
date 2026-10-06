@@ -1,0 +1,507 @@
+components:
+  schemas:
+    Meta:
+      type: object
+      properties:
+        request_id:
+          type: string
+        generated_at:
+          type: string
+          format: date-time
+    Pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: integer
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - admin
+          - manager
+          - specialist
+          - viewer
+        organization_id:
+          type: string
+        mfa_enabled:
+          type: boolean
+        version:
+          type: integer
+    Employee:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        full_name:
+          type: string
+        position_id:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+    Department:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        archived:
+          type: boolean
+        version:
+          type: integer
+    Position:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        version:
+          type: integer
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+        source_file_id:
+          type: string
+        version:
+          type: integer
+    SourceFile:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        filename:
+          type: string
+        size:
+          type: integer
+        checksum:
+          type: string
+    Page:
+      type: object
+      properties:
+        id:
+          type: string
+        source_file_id:
+          type: string
+        number:
+          type: integer
+        text:
+          type: string
+    ProcessingJob:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        kind:
+          type: string
+        status:
+          type: string
+    AnalysisRun:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+    Finding:
+      type: object
+      properties:
+        id:
+          type: string
+        analysis_id:
+          type: string
+        organization_id:
+          type: string
+        severity:
+          type: string
+        status:
+          type: string
+        title:
+          type: string
+    Recommendation:
+      type: object
+      properties:
+        id:
+          type: string
+        analysis_id:
+          type: string
+        organization_id:
+          type: string
+        text:
+          type: string
+    Request:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        source_finding_id:
+          type: string
+        executor_id:
+          type: string
+        version:
+          type: integer
+    RequestItem:
+      type: object
+      properties:
+        id:
+          type: string
+        request_id:
+          type: string
+        employee_id:
+          type: string
+        document_id:
+          type: string
+    DocumentPackage:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageItem'
+    PackageItem:
+      type: object
+      properties:
+        id:
+          type: string
+        package_id:
+          type: string
+        document_id:
+          type: string
+        requirement_id:
+          type: string
+    Executor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        scope:
+          type: string
+    ExecutorAccess:
+      type: object
+      properties:
+        executor_id:
+          type: string
+        organization_id:
+          type: string
+        granted_at:
+          type: string
+          format: date-time
+    ReviewTask:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        document_id:
+          type: string
+    AuditEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        actor_id:
+          type: string
+        action:
+          type: string
+        at:
+          type: string
+          format: date-time
+    Deadline:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        due_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+    Alert:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        level:
+          type: string
+        message:
+          type: string
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        kind:
+          type: string
+        enabled:
+          type: boolean
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        destination:
+          type: string
+        enabled:
+          type: boolean
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        expression:
+          type: string
+        version:
+          type: integer
+    TrainingRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        employee_id:
+          type: string
+        course:
+          type: string
+        completed_at:
+          type: string
+          format: date-time
+    UploadSession:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        status:
+          type: string
+        url:
+          type: string
+    OutboxEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        tenant_id:
+          type: string
+        type:
+          type: string
+        payload:
+          type: object
+    Workplace:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+    Hazard:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        severity:
+          type: string
+        version:
+          type: integer
+    SoutCard:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        workplace_id:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+    PpeItem:
+      type: object
+      properties:
+        id:
+          type: string
+        organization_id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        version:
+          type: integer
+    SignedUrl:
+      type: object
+      properties:
+        url:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+    IngestResult:
+      type: object
+      properties:
+        accepted_refs:
+          type: array
+          items:
+            type: string
+        rejected_refs:
+          type: array
+          items:
+            type: string
+        job_id:
+          type: string
+    MfaEnrollment:
+      type: object
+      properties:
+        secret:
+          type: string
+        otpauth_url:
+          type: string
+        status:
+          type: string
+    PasswordAction:
+      type: object
+      properties:
+        status:
+          type: string
+        email:
+          type: string
+    TokenPair:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+    RoleMatrix:
+      type: object
+      properties:
+        role:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    Snapshot:
+      type: object
+      properties:
+        package_id:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageItem'
+        snapshot_at:
+          type: string
+          format: date-time
+    Me:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+        organization_id:
+          type: string
