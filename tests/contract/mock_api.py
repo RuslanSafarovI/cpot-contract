@@ -215,7 +215,6 @@ class Handler(BaseHTTPRequestHandler):
             if obj is not None:
                 obj["status"] = "ready"; obj["data"]["status"] = "ready"
             return self._send(200, {"data": {"package_id": pid, "items": items, "snapshot_at": "2026-01-01T00:00:00Z"}})
-      text
         if template == "/document-packages/{id}/download":
             pid = values
             exp = int(time.time()) + 300
