@@ -215,23 +215,18 @@ class Handler(BaseHTTPRequestHandler):
             if obj is not None:
                 obj["status"] = "ready"; obj["data"]["status"] = "ready"
             return self._send(200, {"data": {"package_id": pid, "items": items, "snapshot_at": "2026-01-01T00:00:00Z"}})
-        elif template == "/document-packages/{id}/download":
-            if not values:
-                return self._send(404, {"code": "not_found"})
-            pid = values
+        if template == "/document-packages/{id}/download":
+            pid = values[0]
             exp = int(time.time()) + 300
             key = f"packages/{pid}"
             sig = _sign(tenant, key, exp)
-            url = (
-                f"http://127.0.0.1:{os.environ.get('CPOT_PORT', 52868)}/document-packages/download-signed?"
-                f"tenant={tenant}&key={key}&exp={exp}&sig={sig}"
-            )
+            url = f"http://127.0.0.1:{self.server.server_address[1]}/document-packages/download-signed?tenant={tenant}&key={key}&exp={exp}&sig={sig}"
             return self._send(200, {"data": {"url": url, "expires_at": "2026-01-01T00:05:00Z"}})
 
         # ---- requests ----
         if template == "/requests/{id}/assign-executor":
             ex = body.get("executor_id")
-            if ex and ex not in STATE["owned"] and ("executors", ex) not in STATE["store"]:
+            if ex and _owner("executors", ex) != tenant:
                 return self._send(404, {"code": "executor_not_found"})
             return self._send(200, {"data": {"status": "assigned"}})
         if template == "/requests/{id}/items":
@@ -242,12 +237,17 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(201, {"data": {"id": "item-1"}})
 
         # ---- executors ----
-        if template == "/executors/{id}/organizations/{organization_id}/access" and method == "POST":
+        if template == "/executors/{id}/organizations/{organization_id}/access":
+            # Both path references are tenant-bound. A caller from tenant A may only
+            # address an executor owned by A and an organization owned by A.
+            if _owner("executors", values[0]) not in (None, tenant):
+                return self._send(404, {"code": "not_found"})
             if values[1] != f"{tenant}-organizations-1":
-                return self._send(403, {"code": "foreign_organization"})
-            return self._send(201, {"data": {"executor_id": values[0], "organization_id": values[1]}})
-        if template == "/executors/{id}/organizations/{organization_id}/access" and method == "DELETE":
-            return self._send(204)
+                return self._send(404, {"code": "not_found"})
+            if method == "POST":
+                return self._send(201, {"data": {"executor_id": values[0], "organization_id": values[1]}})
+            if method == "DELETE":
+                return self._send(204)
 
         # ---- sout / ppe / workplaces ----
         if template == "/sout-cards/{id}/confirm":
