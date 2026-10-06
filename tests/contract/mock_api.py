@@ -215,13 +215,18 @@ class Handler(BaseHTTPRequestHandler):
             if obj is not None:
                 obj["status"] = "ready"; obj["data"]["status"] = "ready"
             return self._send(200, {"data": {"package_id": pid, "items": items, "snapshot_at": "2026-01-01T00:00:00Z"}})
-        if template == "/document-packages/{id}/download":
+        elif template == "/document-packages/{id}/download":
+            # Явно проверяем наличие values и берем id из пути, а не из values
+            if not values:
+                return self._send(404, {"code": "not_found"})
             pid = values
             exp = int(time.time()) + 300
             key = f"packages/{pid}"
             sig = _sign(tenant, key, exp)
-            url = f"http://127.0.0.1:{os.environ.get('CPOT_PORT', 52868)}/document-packages/download-signed?" \
-                  f"tenant={tenant}&key={key}&exp={exp}&sig={sig}"
+            url = (
+                f"http://127.0.0.1:{os.environ.get('CPOT_PORT', 52868)}/document-packages/download-signed?"
+                f"tenant={tenant}&key={key}&exp={exp}&sig={sig}"
+            )
             return self._send(200, {"data": {"url": url, "expires_at": "2026-01-01T00:05:00Z"}})
 
         # ---- requests ----
